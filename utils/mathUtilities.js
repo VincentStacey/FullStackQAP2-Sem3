@@ -32,7 +32,30 @@ function getRandomNumber(min, max) {
  * @returns {boolean} True if the answer was correct, false otherwise.
  */
 function isCorrectAnswer(question, answer) {
-    return false;
+    const { num1, num2, mathQuestion } = question;
+    let correctAnswer;
+
+    switch (mathQuestion) {
+        case MathOperators.Multiplication:
+            correctAnswer = num1 * num2;
+            break;
+        case MathOperators.Division:
+            correctAnswer = num1 / num2;
+            if(num2 === 0) {
+                return false;
+            }
+            break;
+        case MathOperators.Subtraction:
+            correctAnswer = num1 - num2;
+            break;
+        case MathOperators.Addition:
+            correctAnswer = num1 + num2;
+            break;
+        default:
+            return false;
+    }
+
+    return correctAnswer === answer;
 }
 
 module.exports = {

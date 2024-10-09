@@ -18,11 +18,17 @@ app.get('/quiz', (req, res) => {
     res.render('quiz', { question }); 
 });
 
+app.get('quiz', (req, res) => {
+    const answer = isCorrectAnswer
+    res.render('quiz', {answer});
+});
+
 
 //Handles quiz submissions.
 app.post('/quiz', (req, res) => {
     const { answer } = req.body;
     console.log(`Answer: ${answer}`);
+
 
     //answer will contain the value the user entered on the quiz page
     //Logic must be added here to check if the answer is correct, then track the streak and redirect properly
