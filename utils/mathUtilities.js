@@ -3,8 +3,25 @@
  * 
  * @returns {} The randomly generated math question
  */
-function getQuestion() {
 
+const MathOperators = {
+    Multiplication: "x",
+    Division: "/",
+    Subtraction: "-",
+    Addition: "+",
+};
+
+
+function getQuestion() {
+    const mathOperators = Object.values(MathOperators);
+    return {
+        numbers: getRandomNumber(1,25),
+        mathQuestion: mathOperators[getRandomNumber(0, mathOperators.length -1)]
+    }
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**
@@ -20,5 +37,7 @@ function isCorrectAnswer(question, answer) {
 
 module.exports = {
     getQuestion,
-    isCorrectAnswer
+    getRandomNumber,
+    isCorrectAnswer,
+    MathOperators,
 }

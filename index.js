@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const { getQuestion, isCorrectAnswer } = require('./utils/mathUtilities');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true })); // For parsing form data
@@ -13,8 +14,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/quiz', (req, res) => {
-    res.render('quiz');
+    const question = getQuestion(); 
+    res.render('quiz', { question }); 
 });
+
 
 //Handles quiz submissions.
 app.post('/quiz', (req, res) => {
