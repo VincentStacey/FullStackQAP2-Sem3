@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+  <body>
+    <div class="mainContent">
+      <h1>Quiz Results</h1>
+      <p>Your current streak: <%= streak %></p>
+
+      <% if (isCorrect) { %>
+          <p>Congratulations, your answer was correct!</p>
+      <% } else { %>
+          <p>Sorry, your answer was incorrect.</p>
+      <% } %>
+
+      <a href="/quiz">Try another quiz</a>
+
+    </div>
+  </body>
+</html>
