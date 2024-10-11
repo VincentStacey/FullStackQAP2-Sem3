@@ -15,8 +15,8 @@ const MathOperators = {
 function getQuestion() {
     const mathOperators = Object.values(MathOperators);
     return {
-        Number1: getRandomNumber(1,25),
-        Number2: getRandomNumber(1,25),
+        num1: getRandomNumber(1,25),
+        num2: getRandomNumber(1,25),
         mathQuestion: mathOperators[getRandomNumber(0, mathOperators.length -1)]
     }
 }
@@ -33,31 +33,32 @@ function getRandomNumber(min, max) {
  * @returns {boolean} True if the answer was correct, false otherwise.
  */
 function isCorrectAnswer(question, answer) {
-    const { Number1, Number2, mathOperators} = question;
+    const { num1, num2, mathQuestion } = question; 
     let correctAnswer;
 
-    switch (mathOperators) {
+    switch (mathQuestion) { 
         case MathOperators.Multiplication:
-            correctAnswer = Number1 * Number2;
+            correctAnswer = num1 * num2;
             break;
         case MathOperators.Division:
-            correctAnswer = Number1 / Number2;
-            if(Number2 === 0) {
-                return false;
+            if (num2 === 0) {
+                return false; 
             }
+            correctAnswer = num1 / num2;
             break;
         case MathOperators.Subtraction:
-            correctAnswer = Number1 - Number2;
+            correctAnswer = num1 - num2;
             break;
         case MathOperators.Addition:
-            correctAnswer = Number1 + Number2;
+            correctAnswer = num1 + num2;
             break;
         default:
-            return false;
+            return false; 
     }
 
     return correctAnswer === answer;
 }
+
 
 module.exports = {
     getQuestion,
