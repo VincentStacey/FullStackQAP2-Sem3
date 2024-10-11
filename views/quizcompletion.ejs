@@ -8,11 +8,16 @@
 
       <% if (isCorrect) { %>
           <p>Congratulations, your answer was correct!</p>
+          <form action="/leaderboards" method="POST">
+            <label for="playerName">Name:</label>
+            <input type="text" id="playerName" name="playerName" required>           
+            <button type="submit">Submit</button>
+        </form>
       <% } else { %>
           <p>Sorry, your answer was incorrect.</p>
       <% } %>
 
-      <a href="/quiz">Try another quiz</a>
+      <a href="/quiz">Try another quiz</a><br /><br />                 <a href="/leaderboards">Check out the Leaderboards!!</a>   
 
     </div>
   </body>

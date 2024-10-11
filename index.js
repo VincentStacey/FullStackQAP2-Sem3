@@ -2,7 +2,7 @@ const session = require('express-session')
 const express = require('express');
 const app = express();
 const port = 3000;
-const { getQuestion, isCorrectAnswer } = require('./utils/mathUtilities');
+const { getQuestion, isCorrectAnswer, updateLeaderboard, getLeaderboard } = require('./utils/mathUtilities');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true })); // For parsing form data
@@ -25,13 +25,18 @@ app.get('/quiz', (req, res) => {
 });
 
 app.get("/leaderboards", (req, res) => {
-    res.render("leaderboards"); 
-  });
+  const leaderboard = getLeaderboard();
+  res.render('leaderboards', { leaderboard });
+});
 
-  app.get("/quizcompletion", (req, res) => {
-    res.render("quizcompletion"); 
-  });
+app.get("/quizcompletion", (req, res) => {
+  res.render("quizcompletion"); 
+});
 
+app.get('/reset-leaderboard', (req, res) => {
+  getLeaderboard = [];  
+  res.redirect('/');  
+});
 
 //Handles quiz submissions.
 let currStreak = 0;
@@ -48,13 +53,20 @@ app.post('/quiz', (req, res) => {
 
   if (isCorrect) {
       currStreak++;
+      req.session.streak = (req.session.streak || 0) + 1;  
   } else {
-      currStreak = 0;
+      currStreak = 0; 
   }
 
   res.render('quizCompletion', { streak: currStreak, isCorrect });
 });
 
+app.post('/leaderboards', (req, res) => {
+  const playerName = req.body.playerName;
+  const streak = req.session.streak || 0;   
+  updateLeaderboard(playerName, streak);
+  res.redirect('/leaderboards');
+});
 
 // Start the server
 app.listen(port, () => {

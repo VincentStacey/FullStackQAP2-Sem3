@@ -2,6 +2,13 @@
 <html lang="en">
   <%- include('partials/header') %>
   <body>
-    <h1>Leaderboards</h1>
+      <h1>Leaderboards</h1>
+       <ul>
+         <% leaderboard.forEach(player => { %>
+             <li>Name:<%= player.name %> Streak:<%= player.streak %></li>
+         <% }); %>
+       </ul>
+        <br /><br /><br /><br /><br /><br />
+        <a href="/quiz">Keep the streak alive!!</a>
   </body>
 </html>

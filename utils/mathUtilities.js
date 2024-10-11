@@ -59,10 +59,29 @@ function isCorrectAnswer(question, answer) {
     return correctAnswer === answer;
 }
 
+let leaderboard = [];
+ 
+function updateLeaderboard(playerName, streak) {
+    const playerId = leaderboard.findIndex(player => player.name === playerName);
+    
+    if (playerId >= 0) {
+        leaderboard[playerId].streak = Math.max(leaderboard[playerId].streak, streak); 
+    } else {
+        leaderboard.push({ name: playerName, streak });
+    }
+    leaderboard.sort((a, b) => b.streak - a.streak);
+}
+
+
+function getLeaderboard() {
+    return leaderboard;
+}
 
 module.exports = {
     getQuestion,
     getRandomNumber,
     isCorrectAnswer,
+    updateLeaderboard,
+    getLeaderboard,
     MathOperators,
 }
