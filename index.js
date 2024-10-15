@@ -33,11 +33,6 @@ app.get("/quizcompletion", (req, res) => {
   res.render("quizcompletion"); 
 });
 
-app.get('/reset-leaderboard', (req, res) => {
-  getLeaderboard = [];  
-  res.redirect('/');  
-});
-
 //Handles quiz submissions.
 let currStreak = 0;  
 
