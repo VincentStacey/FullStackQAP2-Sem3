@@ -39,7 +39,7 @@ app.get('/reset-leaderboard', (req, res) => {
 });
 
 //Handles quiz submissions.
-let currStreak = 0;
+let currStreak = 0;  
 
 app.post('/quiz', (req, res) => {
   const { answer } = req.body;
@@ -49,24 +49,25 @@ app.post('/quiz', (req, res) => {
       return res.redirect('/quiz');  
   }
 
-  const isCorrect = isCorrectAnswer(question, Number(answer));  
+  const isCorrect = isCorrectAnswer(question, Number(answer));
 
   if (isCorrect) {
       currStreak++;
       req.session.streak = (req.session.streak || 0) + 1;  
   } else {
-      currStreak = 0; 
+      currStreak = 0;  
+      req.session.streak = 0;  
   }
-
   res.render('quizCompletion', { streak: currStreak, isCorrect });
 });
 
 app.post('/leaderboards', (req, res) => {
   const playerName = req.body.playerName;
-  const streak = req.session.streak || 0;   
+  const streak = req.session.streak || 0;  
   updateLeaderboard(playerName, streak);
   res.redirect('/leaderboards');
 });
+
 
 // Start the server
 app.listen(port, () => {

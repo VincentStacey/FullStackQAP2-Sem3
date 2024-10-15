@@ -3,12 +3,13 @@
   <%- include('partials/header') %>
   <body>
       <h1>Leaderboards</h1>
-       <ul>
+       <ol>
          <% leaderboard.forEach(player => { %>
              <li>Name:<%= player.name %> Streak:<%= player.streak %></li>
          <% }); %>
-       </ul>
+       </ol>
         <br /><br /><br /><br /><br /><br />
         <a href="/quiz">Keep the streak alive!!</a>
+        <a href="/">Back to the Main Menu</a>
   </body>
 </html>
