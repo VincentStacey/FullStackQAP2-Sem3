@@ -5,7 +5,7 @@
       <h1>Leaderboards</h1>
        <ol>
          <% leaderboard.forEach(player => { %>
-             <li>Name:<%= player.name %> Streak:<%= player.streak %></li>
+             <li>Name:<%= player.name %> Streak:<%= player.streak %> Achieved on: <%= player.timestamp %></li>
          <% }); %>
        </ol>
         <br /><br /><br /><br /><br /><br />

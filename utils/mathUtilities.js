@@ -62,7 +62,8 @@ function isCorrectAnswer(question, answer) {
 let leaderboard = [];
 
 function updateLeaderboard(playerName, streak) {
-    leaderboard.push({ name: playerName, streak });
+    const timestamp = new Date().toLocaleString(); 
+    leaderboard.push({ name: playerName, streak, timestamp });
 
     leaderboard.sort((a, b) => b.streak - a.streak);
 

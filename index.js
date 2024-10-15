@@ -51,7 +51,7 @@ app.post('/quiz', (req, res) => {
       req.session.streak = (req.session.streak || 0) + 1;  
   } else {
       currStreak = 0;  
-      req.session.streak = 0;  
+      req.session.streak = 0;
   }
   res.render('quizCompletion', { streak: currStreak, isCorrect });
 });
